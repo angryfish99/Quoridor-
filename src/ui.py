@@ -1,5 +1,5 @@
 import pygame
-import tkinter as tk # For clipboard
+
 from .constants import *
 from .models import QuoridorGame
 
@@ -99,6 +99,7 @@ class QuoridorUI:
     def copy_game_to_clipboard(self):
         notation = self.game.get_game_notation()
         try:
+            import tkinter as tk
             r = tk.Tk()
             r.withdraw()
             r.clipboard_clear()
@@ -106,11 +107,15 @@ class QuoridorUI:
             r.update() # Stay open long enough to copy?
             r.destroy()
             print("Game copied to clipboard!")
+        except ImportError:
+            print("Clipboard not supported in this environment (tkinter missing).")
+            print(f"Game Notation: {notation}")
         except Exception as e:
             print(f"Clipboard Error: {e}")
 
     def load_game_from_clipboard(self):
         try:
+            import tkinter as tk
             r = tk.Tk()
             r.withdraw()
             content = r.clipboard_get()
@@ -124,8 +129,10 @@ class QuoridorUI:
                     self.state = 'GAME'
                 else:
                     print("Failed to load game (invalid notation?)")
+        except ImportError:
+            print("Clipboard not supported in this environment (tkinter missing).")
         except Exception as e:
-             print(f"Clipboard Read Error: {e}")
+            print(f"Clipboard Read Error: {e}")
 
     def draw_game(self):
         self.screen.fill(BG_COLOR)
