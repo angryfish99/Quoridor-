@@ -1,0 +1,23 @@
+# Screen Dimensions
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+BOARD_SIZE = 9  # 9x9 grid
+CELL_SIZE = 50
+MARGIN = 10     # Space between cells for walls
+BOARD_OFFSET_X = (SCREEN_WIDTH - (BOARD_SIZE * (CELL_SIZE + MARGIN))) // 2
+BOARD_OFFSET_Y = (SCREEN_HEIGHT - (BOARD_SIZE * (CELL_SIZE + MARGIN))) // 2
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (200, 50, 50)
+BLUE = (50, 50, 200)
+GREEN = (50, 200, 50)
+GRAY = (100, 100, 100)
+LIGHT_GRAY = (200, 200, 200)
+GOLD = (255, 215, 0)
+BG_COLOR = (40, 40, 40)
+
+# Game Constants
+WALLS_PER_PLAYER_2 = 10
+WALLS_PER_PLAYER_4 = 5
