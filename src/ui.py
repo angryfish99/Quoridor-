@@ -1,4 +1,5 @@
-import pygame
+import sys
+import platform
 
 from .constants import *
 from .models import QuoridorGame
@@ -99,6 +100,12 @@ class QuoridorUI:
     def copy_game_to_clipboard(self):
         notation = self.game.get_game_notation()
         try:
+            if sys.platform == "emscripten":
+                # Web: Use browser prompt to let user copy
+                platform.window.prompt("Copy this game string:", notation)
+                print("Shown copy prompt to user.")
+                return
+
             import tkinter as tk
             r = tk.Tk()
             r.withdraw()
@@ -115,11 +122,16 @@ class QuoridorUI:
 
     def load_game_from_clipboard(self):
         try:
-            import tkinter as tk
-            r = tk.Tk()
-            r.withdraw()
-            content = r.clipboard_get()
-            r.destroy()
+            content = None
+            if sys.platform == "emscripten":
+                # Web: Use browser prompt to let user paste
+                content = platform.window.prompt("Paste game string:")
+            else:
+                import tkinter as tk
+                r = tk.Tk()
+                r.withdraw()
+                content = r.clipboard_get()
+                r.destroy()
             
             if content:
                 print(f"Loading: {content}")

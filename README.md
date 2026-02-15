@@ -47,6 +47,7 @@ python main.py
 You can play the game directly in your browser!
 
 1.  **Online:** Visit [https://angryfish99.github.io/Quoridor-](https://angryfish99.github.io/Quoridor-) (after the GitHub Action completes).
+    *   *Note: On the web, Copy/Paste uses browser prompts due to security restrictions.*
 2.  **Local Build:**
     *   **cmd:** `build_web.bat`
     *   **PowerShell:** `.\build_web.bat`
