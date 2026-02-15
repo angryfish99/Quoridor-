@@ -42,6 +42,15 @@ Execute the main script to start the game:
 python main.py
 ```
 
+## 🌐 Web Version
+
+You can play the game directly in your browser!
+
+1.  **Online:** Visit [https://angryfish99.github.io/Quoridor-](https://angryfish99.github.io/Quoridor-) (after the GitHub Action completes).
+2.  **Local Build:**
+    *   Run `build_web.bat` (Windows) or `python3 -m pygbag .`
+    *   Navigate to the local server address (usually `http://localhost:8000`).
+
 ## 🕹️ Controls
 
 *   **Mouse**: Click to move pawns or place walls.

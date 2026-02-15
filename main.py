@@ -3,8 +3,12 @@ import sys
 from src.constants import *
 from src.ui import QuoridorUI
 
-def main():
-    pygame.init()
+import asyncio
+
+async def main():
+    # pygame.init() # Avoid initializing mixer by default for web build compatibility
+    pygame.display.init()
+    pygame.font.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Quoridor - AI Agent Remake")
     
@@ -36,9 +40,11 @@ def main():
             if ui.game.turn == 1 and not ui.game.players[1].has_won() and not ui.game.players[0].has_won():
                 # Process AI move
                 pygame.display.set_caption("Quoridor - AI Thinking...")
+                # Pump events to keep UI responsive during AI think time (though in async web it might still freeze slightly without threading/workers, but this is a start)
                 pygame.event.pump() 
                 
                 # Get move
+                # In a web context, heavy computation might block. Ideally AI would yield, but for now we keep synchronous AI calls.
                 move_data, move_type = ai.get_best_move(ui.game)
                 
                 if move_type == 'MOVE':
@@ -54,9 +60,12 @@ def main():
         
         pygame.display.flip()
         clock.tick(60)
+        await asyncio.sleep(0)
 
-    pygame.quit()
+    pygame.font.quit()
+    pygame.display.quit()
+    # pygame.quit()
     sys.exit()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
